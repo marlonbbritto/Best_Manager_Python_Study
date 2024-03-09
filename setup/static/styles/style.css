@@ -1,0 +1,45 @@
+:root{
+    --cor-1: #0D0D0D;
+    --cor-2:#BFBFBF;
+    --cor-3: #D9B36C;
+    --cor-4: #A68A56;
+    --cor-5: #8C8C8C;
+    --primary-font: "Shantell Sans", cursive;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+main{
+    padding: 4rem 0rem;
+    background-color: var(--cor-2);
+    height: 100vh;
+    
+}
+footer{
+    background-color: var(--cor-1);
+
+}
+.color-icons-footer{
+    color: var(--cor-3);
+}
+.bg-color-black{
+    background-color: var(--cor-1);
+    color: var(--cor-3);
+}
+.color-item-gold{
+    color: var(--cor-3);
+}
+.color-item-dark{
+    color: var(--cor-1);
+}
+.icon-nav-color{
+    border-color: var(--cor-3);
+}
+.navbar-toggler{
+    color: var(--cor-3);
+}
+
+
