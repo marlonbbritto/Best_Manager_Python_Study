@@ -17,7 +17,7 @@ class Employeer(models.Model):
 
 class Positions(models.Model):
     company_name = models.ForeignKey(Employeer,on_delete=models.CASCADE)
-    position = models.CharField(max_length=100, blank=True,null=True,unique=True)
+    position = models.CharField(max_length=100, blank=True,null=True)
     level = models.IntegerField(blank=True,null=True)
 
     def __str__(self):

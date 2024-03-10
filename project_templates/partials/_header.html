@@ -22,7 +22,7 @@
               <a class="nav-link" aria-current="page" href="{% url 'register_first_admin' %}">Crie uma conta da sua empresa</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="">Login</a>
+              <a class="nav-link" aria-current="page" href="{% url 'login' %}">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="">Logout</a>
@@ -36,7 +36,7 @@
               </a>
               <ul class="dropdown-menu">
                 {% if show_button %}
-                <li><a class="dropdown-item" href="">Cadastro de Colaborador</a></li>
+                <li><a class="dropdown-item" href="{% url 'register_position' %}">Cadastro de Cargo</a></li>
                 {% endif %}
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li>

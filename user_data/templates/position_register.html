@@ -1,0 +1,24 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+    <main class="align-items-center">
+        <form class="row m-3 bg-color-black rounded text-center justify-content-center align-items-center p-2" method="POST">
+            {% csrf_token %}
+            <h2 class="fw-bold col-12 col-lg-12">Registre os cargos da sua organização </h2>
+            {% for field in form.visible_fields %}
+                 <div class='form-floating mb-3 col-12'>
+
+                    {{field}}
+                    <label for="floatingInput">{{field.label}}</label>                    
+                </div>
+            {% endfor %}
+            <div class="flex justify-content-between col-12">
+                           
+                <button type="submit" class="btn btn-outline-success col-4">Avançar</button>
+                <a href="{% url 'index' %}" class="btn btn-outline-success col-4">Concluir</a>     
+            </div>
+        </form>        
+    </main>
+{% endblock %}
+   

@@ -138,3 +138,67 @@ class EmployeerForms(forms.ModelForm):
                 }
             ),
         }
+
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model=Positions
+        fields ='__all__'
+        labels = {
+            'company_name':'Nome da Empresa',
+            'position':'Cargo',
+            'level':'Nivel da Posição'
+        }
+        widgets = {
+            'company_name':forms.Select(
+                attrs={
+                    'type':"text",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Empresa XPTO",
+                }
+            ),
+            'position': forms.TextInput(
+                attrs={
+                    'type':"text",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Nome do Cargo",
+                }
+            ),
+            'level': forms.NumberInput(
+                attrs={
+                    'type':"number",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Nome do Cargo",
+                }
+            ),
+        }
+
+class LoginForms(forms.Form):
+    user_name = forms.CharField(
+        label = 'User Name',
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                'type':"text",
+                'class':"form-control mb-3", 
+                'id':"floatingInput",
+                'placeholder':"mokeyDLuffy",
+            }
+        )
+    )
+    password=forms.CharField(
+        label='Password', 
+        required=True, 
+        max_length=70,
+        widget=forms.PasswordInput(
+            attrs={
+                'type':"password", 
+                'class':"form-control",
+                'id':"floatingPassword", 
+                'placeholder':"Password",
+            }
+        ),
+    )
