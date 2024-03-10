@@ -103,8 +103,9 @@ def register_position(request):
             errors = form.errors.as_data()
             for field, error in errors.items():
                 messages.error(request, f"Erro no campo '{field}': {error[0]}")
-
-    return render(request, 'position_register.html', {'form': form})
+    user_company = Employeer.objects.filter(admin_user=request.user).first()    
+    company_positions = Positions.objects.filter(company_name=user_company)
+    return render(request, 'position_register.html', {'form': form,'company_positions':company_positions})
 
 
 
