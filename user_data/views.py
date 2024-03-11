@@ -37,7 +37,9 @@ def login(request):
     return render(request,'login.html',{'form':form}) 
 
 def logout(request):
-    pass
+    auth.logout(request)
+    messages.success(request,"Logout efetuado")
+    return redirect('index')
 
 def register_admin(request):
     form=UserForms    
@@ -106,8 +108,6 @@ def register_position(request):
     user_company = Employeer.objects.filter(admin_user=request.user).first()    
     company_positions = Positions.objects.filter(company_name=user_company)
     return render(request, 'position_register.html', {'form': form,'company_positions':company_positions})
-
-
 
 def list_employees(request):
     pass
