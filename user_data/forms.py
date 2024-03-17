@@ -202,3 +202,67 @@ class LoginForms(forms.Form):
             }
         ),
     )
+
+class EmployeeForms(forms.ModelForm):
+    class Meta:
+        model = Users_Data
+        fields = '__all__'
+        labels = {
+            'user':'Usuario',
+            'born_date':'Data de nacimento', 
+            'active':'Status',
+            'admission_date':'Data de admissão na empresa', 
+            'position': 'Cargo' ,
+            'employeer':'Empresa' 
+        }
+        widgets = {        
+            'user':forms.Select(
+                    attrs={
+                        'type':"text",
+                        'class':"form-control", 
+                        'id':"floatingInput",
+                        'placeholder':"joaosilva",
+                    }
+                ),
+            'born_date':forms.DateInput(
+                attrs={
+                    'type':"date",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Data de nacimento",
+                }
+            ),
+            'active':forms.CheckboxInput(
+                attrs={
+                    'type':"checkbox",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Status do colaborador",
+                }
+            ),
+            'admission_date':forms.DateInput(
+                attrs={
+                    'type':"date",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Data de admissão",
+                }
+            ),
+            'position':forms.Select(
+                attrs={
+                    'type':"text",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Cargo",
+                }
+            ),
+            'employeer':forms.Select(
+                attrs={
+                    'type':"text",
+                    'class':"form-control", 
+                    'id':"floatingInput",
+                    'placeholder':"Empresa 1",
+                }
+            ),
+
+        }

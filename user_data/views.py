@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-from user_data.forms import LoginForms, PositionForm, UserForms,EmployeerForms
+from user_data.forms import EmployeerForms, LoginForms, PositionForm, UserForms,EmployeeForms
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 
@@ -81,8 +81,55 @@ def register_company(request):
     return render(request,'company_register.html',{'form':form})
     
 
-def register_employee(request):
-    pass
+def register_employee_user(request):
+    form_user = UserForms()   
+
+    if request.method == 'POST':
+        form_user = UserForms(request.POST)
+        
+
+        if form_user.is_valid():
+            print("Formulários são válidos")
+
+            username = form_user.cleaned_data['user_name']
+
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'Este nome de usuário já está sendo utilizado')
+                return redirect('employee_register_user')
+
+            if form_user.cleaned_data['password'] != form_user.cleaned_data['password2']:
+                messages.error(request, 'As senhas devem ser idênticas')
+                return redirect('employee_register_user')
+
+            # Criar usuário
+            user = User.objects.create_user(
+                username=username,
+                password=form_user.cleaned_data['password'],
+                email=form_user.cleaned_data['email'],
+                first_name=form_user.cleaned_data['first_name'],
+                last_name=form_user.cleaned_data['surname']
+            )
+            print("Usuário criado:", user)
+
+            user.save()          
+            messages.success(request, 'Usuário e funcionário cadastrados com sucesso')
+            return redirect('employee_register_data')
+            
+
+    return render(request, 'employee_register_user.html', {'form_user': form_user})
+
+def register_employee_data(request):
+    form=EmployeeForms
+
+    if request.method == 'POST':
+        form=EmployeeForms(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Dados do colaborador cadastrado com sucesso')
+            return redirect('index')
+    return render(request,'employee_register_data.html',{'form':form})
+
 
 def register_position(request):
     if not request.user.is_authenticated:
