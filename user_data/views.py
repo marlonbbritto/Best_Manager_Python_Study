@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from user_data.forms import EmployeerForms, LoginForms, PositionForm, UserForms,EmployeeForms
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
+from django.db.models import ObjectDoesNotExist
 
 from user_data.models import Employeer,Positions,Users_Data
 
@@ -157,5 +158,22 @@ def register_position(request):
     return render(request, 'position_register.html', {'form': form,'company_positions':company_positions})
 
 def list_employees(request):
-    pass
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirecionar para a página de login se o usuário não estiver autenticado
+    
+    user = request.user
+    try:
+        users_data = Users_Data.objects.get(user=user)
+        company = users_data.employeer
+    except ObjectDoesNotExist:
+        try:
+            users_data = Employeer.objects.get(admin_user=user)
+            company = users_data.id
+        except Employeer.DoesNotExist:
+            messages.error(request, 'Nenhum dado de usuário ou empresa encontrado para este usuário.')
+            return redirect('index')
+
+    employees = Users_Data.objects.filter(employeer=company)
+    
+    return render(request, 'list_employees.html', {'employees': employees})
 

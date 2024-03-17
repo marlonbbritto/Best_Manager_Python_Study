@@ -1,0 +1,30 @@
+{% extends 'shared/base.html'%}
+{% load static %}
+{% block content %}
+    <main class="row justify-content-center align-items-center m-0 flex-grow-1">
+        <div class="row m-3 mx-3 bg-color-black rounded text-center justify-content-center align-items-center p-2">
+            <h2 class="fw-bold col-12 col-lg-12">Colaboradores da Empresa</h2>
+            <table class="table table-dark table-striped table-hover" >
+                <thead>
+                  <tr class="color-gold">
+                    <th scope="col color-gold">Empresa</th>
+                    <th scope="col color-gold">Cargo</th>
+                    <th scope="col color-gold">Data de Admissão</th>                                 
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for employee in employees %}
+                  <tr>
+                    <th scope="row"><a href="">{{employee.user.first_name}}</a></th>
+                    <td>{{employee.position.position}}</td>
+                    <td>{{employee.admission_date}}</td>
+                    
+                    
+                  </tr>    
+                  {% endfor %}             
+                </tbody>
+              </table>
+        </div>       
+    </main>
+{% endblock %}
