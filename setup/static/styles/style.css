@@ -41,5 +41,7 @@ footer{
 .navbar-toggler{
     color: var(--cor-3);
 }
-
+.navbar-brand:hover {
+    color: white; /* ou qualquer outra cor desejada */
+}
 

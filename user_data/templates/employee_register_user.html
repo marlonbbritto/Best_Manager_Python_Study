@@ -11,8 +11,9 @@
                 {{ field }}
                 <label for="floatingInput">{{ field.label }}</label>
             </div>            
-        {% endfor %}        
-        <button type="submit" class="btn btn-outline-success col-12">Concluir</button>
+        {% endfor %} 
+        <a href="{% url 'employee_register_data' %} " class="btn btn-outline-success col-4">Pular</a>       
+        <button type="submit" class="btn btn-outline-success col-4">Concluir</button>
     </form>
 </main>
 {% endblock %}
