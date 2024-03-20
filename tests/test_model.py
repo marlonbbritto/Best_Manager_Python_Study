@@ -51,6 +51,9 @@ class EmployeerModelTestCase(TestCase):
                 city='Maringá'
             )
     def test_create_employeer_country_default(self):
+
+        '''Teste para verificar Default com country como Brazil quando não fornecido'''
+
         self.employeer1 = Employeer.objects.create(
             company_name='Empresa teste 2',
             admin_user=self.existing_user2,
