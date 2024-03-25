@@ -6,6 +6,9 @@ from django.contrib import messages, auth
 from django.db.models import ObjectDoesNotExist
 
 from user_data.models import Employeer,Positions,Users_Data
+from django.urls import reverse
+from django.forms.utils import ErrorList
+
 
 def index(request):
     user=request.user
@@ -68,18 +71,29 @@ def register_admin(request):
             return redirect('company_register')
     return render(request,'register_admin.html',{'form':form})
 
+
+
+
+
 def register_company(request):
-    form = EmployeerForms
+    form = EmployeerForms()
     if request.method == 'POST':
         form = EmployeerForms(request.POST)
-        if form.is_valid():
-            if Employeer.objects.filter(company_name=form['company_name']).exists():
-                messages.error(request,'Uma empresa com esse nome ja esta cadastrada')
-                return  redirect('company_register')
-            messages.success(request,'Empresa cadastrada com sucesso')
+        if form.is_valid():                   
+            messages.success(request, 'Empresa cadastrada com sucesso')
             form.save()
-            return redirect('login')    
-    return render(request,'company_register.html',{'form':form})
+            return redirect('login')  
+        else:
+            errors = form.errors.as_data()
+            error_message = "O formulário contém os seguintes erros: "
+            for field, error_list in errors.items():
+                error_message += f"{field}: {error_list}"
+            messages.error(request, error_message)
+            return redirect('index')  
+    return render(request, 'company_register.html', {'form': form})
+
+
+
     
 
 def register_employee_user(request):
