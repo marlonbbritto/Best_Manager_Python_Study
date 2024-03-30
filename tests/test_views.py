@@ -106,6 +106,20 @@ class RegisterCompanyTest(TestCase):
         # Verificar se a parte relevante da mensagem de erro esperada está presente em pelo menos uma das mensagens
         error_message_part = 'O formulário contém os seguintes erros:'
         self.assertTrue(any(error_message_part in str(message) for message in messages))
+    
+    def test_company_register_sucess(self):
+        data = {
+            'company_name':'Empresa Teste 321',
+            'admin_user':User.objects.create(username = 'Admin_teste3',password = 'Teste321',email = 'admin@teste3.com',first_name='Admin',last_name='Teste').pk,
+            'country': 'Brazil',
+            'state': 'Paraná',
+            'city': 'Maringá'
+        }
+        response = self.client.post(self.register_company_url,data)
+        self.assertEqual(response.status_code,302)
+        self.assertTrue(Employeer.objects.filter(company_name='Empresa Teste 321').exists())
+        
+
 
 
 
