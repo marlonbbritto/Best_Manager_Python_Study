@@ -71,10 +71,6 @@ def register_admin(request):
             return redirect('company_register')
     return render(request,'register_admin.html',{'form':form})
 
-
-
-
-
 def register_company(request):
     form = EmployeerForms()
     if request.method == 'POST':
@@ -91,10 +87,6 @@ def register_company(request):
             messages.error(request, error_message)
             return redirect('index')  
     return render(request, 'company_register.html', {'form': form})
-
-
-
-    
 
 def register_employee_user(request):
     form_user = UserForms()   
@@ -144,7 +136,6 @@ def register_employee_data(request):
             messages.success(request,'Dados do colaborador cadastrado com sucesso')
             return redirect('index')
     return render(request,'employee_register_data.html',{'form':form})
-
 
 def register_position(request):
     if not request.user.is_authenticated:
