@@ -182,3 +182,6 @@ def list_employees(request):
     
     return render(request, 'list_employees.html', {'employees': employees})
 
+def employee_information(request, user_id):
+    user_data = get_object_or_404(Users_Data, user_id=user_id)
+    return render(request, 'employee_information.html', {'user_data': user_data})

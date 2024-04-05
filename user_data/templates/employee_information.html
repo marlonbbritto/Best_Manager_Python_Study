@@ -1,0 +1,53 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="align-items-top">
+    <a href="{% url 'list_employees' %}" class="btn btn-dark"> <i class="bi bi-backspace-fill"></i> Voltar </a>
+    
+    <div class="row m-3 bg-color-black rounded text-center justify-content-center align-items-center p-2">
+        
+        <nav class="navbar navbar-expand-lg color-item-dark" data-bs-theme="dark">
+            <div class="container-fluid">
+             
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="#">Dados gerais</a>                      
+                  <a class="nav-link disabled" aria-disabled="true">Feedbacks</a>
+                </div>
+              </div>
+            </div>
+        </nav>
+        <section class="d-flex flex-column">
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mx-1">Nome: </h5>
+                <h5 class="">{{user_data.user.first_name}} {{user_data.user.last_name}}</h5>                    
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mx-1">Data de Nacimento: </h5>
+                <h5 class="">{{user_data.born_date}}</h5>                    
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mx-1">Status: </h5>
+                <h5 class="">{% if user_data.active %} Sim {% else %} Não {% endif %}</h5>                    
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mx-1">Na empresa desde: </h5>
+                <h5 class="">{{ user_data.admission_date}}</h5>                    
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mx-1">Cargo: </h5>
+                <h5 class="">{{ user_data.position.position }}</h5>                    
+            </div>
+
+
+        </section>  
+            
+    </div>
+    
+</main>
+{% endblock %}
+   
